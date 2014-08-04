@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 class Cat
 {
 	private $maxCats = 4;

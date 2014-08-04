@@ -36,7 +36,8 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="#">Главная</a></li>
+          <li> <a href="/?r=add">Добавить</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
@@ -51,8 +52,38 @@
 
       <div class="row marketing">
         <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Имя</th>
+          <th>Отчество</th>
+          <th>Фамилия</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Тарас</td>
+          <td>Григорьевич</td>
+          <td>Шевченко</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Павел</td>
+          <td>Григорьевич</td>
+          <td>Тычина</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Григорий</td>
+          <td>Саввич</td>
+          <td>Сковорода</td>
+        </tr>
+      </tbody>
+    </table>
+
 
           <h4>Subheading</h4>
           <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
