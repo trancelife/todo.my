@@ -50,16 +50,15 @@
         <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
       </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
           
-    <table class="table">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>#</th>
           <th>Имя</th>
           <th>Отчество</th>
           <th>Фамилия</th>
+          <th>Годы жизни</th>
         </tr>
       </thead>
       <tbody>
@@ -68,40 +67,29 @@
           <td>Тарас</td>
           <td>Григорьевич</td>
           <td>Шевченко</td>
+          <td>1814-1861</td>
         </tr>
         <tr>
           <td>2</td>
           <td>Павел</td>
           <td>Григорьевич</td>
           <td>Тычина</td>
+          <td>1891-1967</td>
         </tr>
         <tr>
           <td>3</td>
           <td>Григорий</td>
           <td>Саввич</td>
           <td>Сковорода</td>
+          <td>1722-1794</td>
         </tr>
       </tbody>
     </table>
 
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          
         </div>
 
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
       </div>
 
       <div class="footer">
