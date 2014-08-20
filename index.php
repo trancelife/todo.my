@@ -3,81 +3,130 @@
 
 
 include __DIR__ . "/src/Http/Request.php";
+$db = include __DIR__ . "/app/db.php";
+include __DIR__ . "/app/Models/task.php";
 
 use Phpcourses\Http\Request;
 $request = new Request();
 
 if ($request->getRoute() == "list") {
-    todoList($request);
+    todoList($request, $db);
 }
 
 if ($request->getRoute() == "delete") {
-    todoDelete();
+    todoDelete($request, $db);
 }
 
 if ($request->getRoute() == "add") {
-    todoAdd();
+    todoAdd($request, $db);
 }
 
-function todoList($request)
+if ($request->getRoute() == "show") {
+    todoShow($request, $db);
+}
+
+if ($request->getRoute() == "update") {
+    todoUpdate($request, $db);
+}
+
+function todoList($request, $db)
 {
     $pageTitle = "ToDo List";
-    // echo $request->getParam("age");
-    // echo "<br/>";
-    // echo $request->getParam("name");
-    // echo "<br/>";
-    // echo $request->getParam("fname", "...");
-    
+
+    $query = $db->query('SELECT id, title, resolved, createdAt
+     from tasks');
+
+    $query->setFetchMode(PDO::FETCH_OBJ);  
+
     include __DIR__."/app/views/list.php";
 }
 
-function todoDelete()
-{
-    if ( !isset($_GET['id']) ) {
-        echo "Id not found";
-        return;   
-    }
-    echo $_GET['id'];
-    echo "<br />Delete page";
+function todoDelete($request, $db)
+{   
+    $id = $request->getParam("id");
+
+    $query = $db->prepare("DELETE FROM tasks WHERE id = :id");
+    $query->execute(array(
+        "id" => $id
+    ));
+
+    header("Location: /");
 }
 
 // http://localhost:12345/?r=add
-function todoAdd()
+function todoAdd($request, $db)
 {
     // get from $_POST
     $title;
     $data;
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<h1>Add</h1>
-</body>
-</html>
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // var_dump($_POST);
+        $query = $db->prepare("INSERT INTO tasks 
+    ( title, resolved, createdAt ) 
+    values ( :title, :resolved, :date)");
+        $query->execute(array(
+            "title" => $request->getPost("title", ""),
+            "resolved" => ($request->getPost("resolved", false)) ? 1: 0,
+            "date" => date("Y-m-d H:i:s")
+        ));
+    }
 
-<?php
+    include __DIR__."/app/views/add.php";
 }
 
-function todoShow()
+function todoShow($request, $db)
 {
+    $id = $request->getParam("id");
 
+    $query = $db->prepare('SELECT id, title, resolved, createdAt
+     FROM tasks WHERE id=:id');
+
+    $query->execute(array(
+        "id" => $id
+    ));
+
+    $query->setFetchMode(PDO::FETCH_CLASS, 'task');
+
+    $task = $query->fetch();// $row
+
+    include __DIR__."/app/views/show.php";   
 }
 
 
-function todoResolve()
+function todoUpdate($request, $db)
 {
+    $id = $request->getParam("id");
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // var_dump($_POST);
+        $query = $db->prepare("UPDATE tasks 
+            SET 
+                title = :title, 
+                resolved = :resolved, 
+                createdAt = :createdAt
+            WHERE id = :id");
+
+        $query->execute(array(
+            "title" => $request->getPost("title", ""),
+            "resolved" => ($request->getPost("resolved", false)) ? 1: 0,
+            "createdAt" => date("Y-m-d H:i:s"),
+            "id" => $id
+        ));
+
+        header("Location: /?r=show&id=".$id);
+    }
+
+    $query = $db->prepare('SELECT id, title, resolved, createdAt
+     FROM tasks WHERE id=:id');
+
+    $query->execute(array(
+        "id" => $id
+    ));
+
+    $query->setFetchMode(PDO::FETCH_OBJ);
+
+    $task = $query->fetch();// $row
+
+    include __DIR__."/app/views/update.php";
 }
-
-
-// $filename = __DIR__.preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
-// if (php_sapi_name() === 'cli-server' && is_file($filename)) {
-//     return false;
-// }
-
-// $app = require __DIR__.'/src/app.php';
-// $app->run();

@@ -35,8 +35,8 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li><a href="/">Главная</a></li>
-          <li class="active"><a href="/?r=add">Добавить</a></li>
+          <li class="active"><a href="/">Главная</a></li>
+          <li><a href="/?r=add">Добавить</a></li>
           <li><a href="/about.php">О нас</a></li>
           <li><a href="/contact.php">Контакт</a></li>
         </ul>
@@ -44,31 +44,21 @@
       </div>
 
       <div>
-        <h1>Новая задача</h1>
-
-        <form role="form" method="post" action="/?r=add">
-          <div class="form-group">
-            <label for="title">Название</label>
-            <input type="text" 
-              class="form-control" 
-              id="task" 
-              name="title" 
-              placeholder="Название">
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="resolved"> Выполнено
-            </label>
-          </div>
-          <button type="submit" class="btn btn-default">Добавить</button>
-        </form>
-      
+        
+        <dl>
+          <dt>Название</dt>
+          <dd><?php echo $task->title?></dd>
+          <dt>Дата</dt>
+          <dd><?php echo $task->humanDate();?></dd>
+          <dt>Выполнено</dt>
+          <dd><?php echo $task->humanResolved();?></dd>
+        </dl>
       </div>
 
       <div class="row marketing">
         <div class="col-lg-6">&nbsp;</div>
         <div class="col-lg-6">&nbsp;</div>
-      </div>
+      </div
 
       <div class="footer">
         <p>&copy; Company 2014</p>

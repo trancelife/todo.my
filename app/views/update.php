@@ -46,18 +46,21 @@
       <div>
         <h1>Новая задача</h1>
 
-        <form role="form" method="post" action="/?r=add">
+        <form role="form" method="post" action="/?r=update&id=<?php echo $task->id; ?>">
           <div class="form-group">
             <label for="title">Название</label>
             <input type="text" 
               class="form-control" 
               id="task" 
               name="title" 
-              placeholder="Название">
+              placeholder="Название"
+              value="<?php echo $task->title ?>">
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="resolved"> Выполнено
+              <input type="checkbox" name="resolved"
+              <?php echo ($task->resolved) ? "checked" : "" ; ?>
+              > Выполнено
             </label>
           </div>
           <button type="submit" class="btn btn-default">Добавить</button>

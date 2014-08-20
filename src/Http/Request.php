@@ -44,5 +44,11 @@ class Request
         return $default;
     }
 
-    // add method getPost($name, $default)
+    public function getPost($name, $default="")
+    {
+        if (isset($_POST[$name])) {
+            return $_POST[$name];
+        }
+        return $default;
+    }
 }
